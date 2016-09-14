@@ -53,7 +53,6 @@
             android:alpha="0"
             android:src="@drawable/ic_dot1" />
 
-
     </FrameLayout>
 
     <LinearLayout
@@ -77,8 +76,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_btn1" />
+                android:background="@android:color/white"
+                android:src="@drawable/selector_btn1" />
 
             <ImageButton
                 android:id="@+id/activity_music_2_ib"

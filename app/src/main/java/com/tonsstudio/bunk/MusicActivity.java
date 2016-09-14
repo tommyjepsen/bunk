@@ -1,8 +1,6 @@
 package com.tonsstudio.bunk;
 
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -55,6 +53,7 @@ public class MusicActivity extends AppCompatActivity {
     int id = 1;
     int screenWidth = 0;
     int screenHeight = 0;
+    int speed = 10;
 
     @Bind(R.id.activity_music_sequence_nr_tv)
     TextView activityMusicSequenceNrTv;
@@ -69,11 +68,12 @@ public class MusicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music);
         ButterKnife.bind(this);
-        Display display = getWindowManager().getDefaultDisplay();
-        screenWidth = display.getWidth();  // deprecated
-        screenHeight = display.getHeight();  // deprecated
 
+        Display display = getWindowManager().getDefaultDisplay();
+        screenWidth = display.getWidth();
+        screenHeight = display.getHeight();
         loop = new Handler();
+
         loopRunnable = new Runnable() {
             @Override
             public void run() {
@@ -105,7 +105,7 @@ public class MusicActivity extends AppCompatActivity {
                 for (int i = 0; i < dots.size(); i++) {
                     ImageView dot = (ImageView) findViewById(dots.get(i));
                     if (dot != null) {
-                        dot.setTranslationY((dot.getTranslationY() + 10));
+                        dot.setTranslationY((dot.getTranslationY() + 15));
                         if (dot.getTranslationY() > screenHeight) {
                             dots.remove(i);
                         }
@@ -160,32 +160,21 @@ public class MusicActivity extends AppCompatActivity {
     }
 
     public void start() {
-        loop.postDelayed(loopRunnable, 10);
+        loop.postDelayed(loopRunnable, speed);
     }
 
     public void playSample(int nr) {
         switch (nr) {
             case 1:
-                SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-
-                /** soundId for Later handling of sound pool **/
-                int soundId = sp.load(this, R.raw.kick, 1); // in 2nd param u have to pass your desire ringtone
-
-                sp.play(soundId, 1, 1, 0, 0, 1);
-//
-//                MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.kick); // in 2nd param u have to pass your desire ringtone
-//                //mPlayer.prepare();
-//                mPlayer.start();
-
-//                final MediaPlayer mp1 = MediaPlayer.create(this, R.raw.kick);
-//                mp1.start();
-//                mp1.getDuration();
-//                mp1.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                    @Override
-//                    public void onCompletion(MediaPlayer mp) {
-//                        mp.release();
-//                    }
-//                });
+                final MediaPlayer mp1 = MediaPlayer.create(this, R.raw.kick);
+                mp1.start();
+                mp1.getDuration();
+                mp1.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
                 createDot(1);
                 break;
             case 2:
