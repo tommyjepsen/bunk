@@ -84,12 +84,23 @@ public class MusicActivity extends AppCompatActivity {
     Button activityMusicUndoNrBtn;
     @Bind(R.id.activity_music_rec_btn)
     Button activityMusicRecBtn;
+    @Bind(R.id.activity_music_fadeout_fl)
+    FrameLayout activityMusicFadeoutFl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music);
         ButterKnife.bind(this);
+
+        activityMusicFadeoutFl.animate().alpha(0).setStartDelay(100).setDuration(1500).start();
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                activityMusicFadeoutFl.setVisibility(View.GONE);
+            }
+        }, 1800);
 
         Display display = getWindowManager().getDefaultDisplay();
         screenWidth = display.getWidth();
