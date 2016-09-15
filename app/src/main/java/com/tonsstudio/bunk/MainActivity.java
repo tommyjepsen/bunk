@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
-                activityMainLogoIv.animate().alpha(0).setDuration(250).start();
-                activityMainFadeinFl.animate().alpha(1).setDuration(1000).start();
+                activityMainLogoIv.animate().alpha(0).setStartDelay(200).setDuration(250).start();
+                activityMainFadeinFl.animate().alpha(1).setStartDelay(200).setDuration(1000).start();
 
                 activityMainLogoIv.postDelayed(new Runnable() {
                     @Override
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                         overridePendingTransition(0, 0);
                     }
-                }, 1200);
+                }, 1500);
             }
 
             @Override
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdFailedToLoad(int i) {
                 super.onAdFailedToLoad(i);
-                activityMainLogoIv.animate().alpha(0).setDuration(250).start();
-                activityMainFadeinFl.animate().alpha(1).setDuration(1000).start();
+                activityMainLogoIv.animate().alpha(0).setStartDelay(200).setDuration(250).start();
+                activityMainFadeinFl.animate().alpha(1).setStartDelay(200).setDuration(1000).start();
 
                 activityMainLogoIv.postDelayed(new Runnable() {
                     @Override
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                         overridePendingTransition(0, 0);
                     }
-                }, 1200);
+                }, 1500);
             }
         });
         AdRequest adRequest = new AdRequest.Builder()
