@@ -40,6 +40,26 @@ public class MusicActivity extends AppCompatActivity {
     ImageButton activityMusic8Ib;
     @Bind(R.id.activity_music_line_fl)
     FrameLayout activityMusicLineFl;
+    @Bind(R.id.activity_music_9_ib)
+    ImageButton activityMusic9Ib;
+    @Bind(R.id.activity_music_10_ib)
+    ImageButton activityMusic10Ib;
+    @Bind(R.id.activity_music_11_ib)
+    ImageButton activityMusic11Ib;
+    @Bind(R.id.activity_music_12_ib)
+    ImageButton activityMusic12Ib;
+    @Bind(R.id.activity_music_13_ib)
+    ImageButton activityMusic13Ib;
+    @Bind(R.id.activity_music_14_ib)
+    ImageButton activityMusic14Ib;
+    @Bind(R.id.activity_music_15_ib)
+    ImageButton activityMusic15Ib;
+    @Bind(R.id.activity_music_16_ib)
+    ImageButton activityMusic16Ib;
+    @Bind(R.id.activity_music_17_ib)
+    ImageButton activityMusic17Ib;
+    @Bind(R.id.activity_music_18_ib)
+    ImageButton activityMusic18Ib;
 
     Handler loop;
     Runnable loopRunnable;
@@ -47,21 +67,20 @@ public class MusicActivity extends AppCompatActivity {
     ArrayList<Integer> dots = new ArrayList<>();
     ArrayList<LoopSequence> loops = new ArrayList<>();
 
-    boolean loopsSequence = false;
+    boolean recording = false;
     int loopsSequenceTiming = 0;
-    int highestLoopTime = 0;
     int id = 1;
     int screenWidth = 0;
     int screenHeight = 0;
     int speed = 10;
+    int speedDraw = 15;
 
     @Bind(R.id.activity_music_sequence_nr_tv)
     TextView activityMusicSequenceNrTv;
     @Bind(R.id.activity_music_startover_btn)
     Button activityMusicStartoverBtn;
-    @Bind(R.id.activity_music_undo_btn)
-    Button activityMusicUndoBtn;
-
+    @Bind(R.id.activity_music_undo_nr_btn)
+    Button activityMusicUndoNrBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +115,8 @@ public class MusicActivity extends AppCompatActivity {
                 }
 
                 if (loopsSequenceTiming > 100) {
+                    createStartDot();
+
                     loopsSequenceTiming = 1;
                 }
 
@@ -105,7 +126,7 @@ public class MusicActivity extends AppCompatActivity {
                 for (int i = 0; i < dots.size(); i++) {
                     ImageView dot = (ImageView) findViewById(dots.get(i));
                     if (dot != null) {
-                        dot.setTranslationY((dot.getTranslationY() + 15));
+                        dot.setTranslationY((dot.getTranslationY() + speedDraw));
                         if (dot.getTranslationY() > screenHeight) {
                             dots.remove(i);
                         }
@@ -124,27 +145,25 @@ public class MusicActivity extends AppCompatActivity {
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(50, 50);
         dot.setLayoutParams(lp);
         dot.setId(id);
-        if (dotNr == 1) {
-            dot.setImageDrawable(getResources().getDrawable(R.drawable.ic_dot1));
-        } else if (dotNr == 2) {
-            dot.setImageDrawable(getResources().getDrawable(R.drawable.ic_dot2));
-        } else if (dotNr == 3) {
-            dot.setImageDrawable(getResources().getDrawable(R.drawable.ic_dot3));
-        } else if (dotNr == 4) {
-            dot.setImageDrawable(getResources().getDrawable(R.drawable.ic_dot4));
-        } else if (dotNr == 5) {
-            dot.setImageDrawable(getResources().getDrawable(R.drawable.ic_dot5));
-        } else if (dotNr == 6) {
-            dot.setImageDrawable(getResources().getDrawable(R.drawable.ic_dot6));
-        } else if (dotNr == 7) {
-            dot.setImageDrawable(getResources().getDrawable(R.drawable.ic_dot7));
-        } else if (dotNr == 8) {
-            dot.setImageDrawable(getResources().getDrawable(R.drawable.ic_dot8));
-        }
+        dot.setImageDrawable(getResources().getDrawable(R.drawable.ic_dot1));
         dot.setPaddingRelative(0, 0, 0, 0);
         activityMusicLineFl.addView(dot);
         dots.add(dot.getId());
+        /**
+         * If loop is enabled and dot not already exists, then add it
+         */
+    }
 
+    public void createStartDot() {
+        id = id + 1;
+        ImageView dot = new ImageView(this);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(50, 50);
+        dot.setLayoutParams(lp);
+        dot.setId(id);
+        dot.setImageDrawable(getResources().getDrawable(R.drawable.ic_start));
+        dot.setPaddingRelative(0, 0, 0, 0);
+        activityMusicLineFl.addView(dot);
+        dots.add(dot.getId());
         /**
          * If loop is enabled and dot not already exists, then add it
          */
@@ -164,12 +183,12 @@ public class MusicActivity extends AppCompatActivity {
     }
 
     public void playSample(int nr) {
+        MediaPlayer mp;
         switch (nr) {
             case 1:
-                final MediaPlayer mp1 = MediaPlayer.create(this, R.raw.kick);
-                mp1.start();
-                mp1.getDuration();
-                mp1.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                mp = MediaPlayer.create(this, R.raw.s1);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         mp.release();
@@ -178,9 +197,9 @@ public class MusicActivity extends AppCompatActivity {
                 createDot(1);
                 break;
             case 2:
-                final MediaPlayer mp2 = MediaPlayer.create(this, R.raw.snare);
-                mp2.start();
-                mp2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                mp = MediaPlayer.create(this, R.raw.s2);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         mp.release();
@@ -189,9 +208,9 @@ public class MusicActivity extends AppCompatActivity {
                 createDot(2);
                 break;
             case 3:
-                final MediaPlayer mp3 = MediaPlayer.create(this, R.raw.bass);
-                mp3.start();
-                mp3.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                mp = MediaPlayer.create(this, R.raw.s3);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         mp.release();
@@ -200,9 +219,9 @@ public class MusicActivity extends AppCompatActivity {
                 createDot(3);
                 break;
             case 4:
-                final MediaPlayer mp4 = MediaPlayer.create(this, R.raw.dy);
-                mp4.start();
-                mp4.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                mp = MediaPlayer.create(this, R.raw.s4);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         mp.release();
@@ -211,9 +230,9 @@ public class MusicActivity extends AppCompatActivity {
                 createDot(4);
                 break;
             case 5:
-                final MediaPlayer mp5 = MediaPlayer.create(this, R.raw.hyr);
-                mp5.start();
-                mp5.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                mp = MediaPlayer.create(this, R.raw.s5);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         mp.release();
@@ -222,9 +241,9 @@ public class MusicActivity extends AppCompatActivity {
                 createDot(5);
                 break;
             case 6:
-                final MediaPlayer mp6 = MediaPlayer.create(this, R.raw.bass2);
-                mp6.start();
-                mp6.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                mp = MediaPlayer.create(this, R.raw.s6);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         mp.release();
@@ -233,9 +252,9 @@ public class MusicActivity extends AppCompatActivity {
                 createDot(6);
                 break;
             case 7:
-                final MediaPlayer mp7 = MediaPlayer.create(this, R.raw.bass);
-                mp7.start();
-                mp7.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                mp = MediaPlayer.create(this, R.raw.s7);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         mp.release();
@@ -244,9 +263,9 @@ public class MusicActivity extends AppCompatActivity {
                 createDot(7);
                 break;
             case 8:
-                final MediaPlayer mp8 = MediaPlayer.create(this, R.raw.bass);
-                mp8.start();
-                mp8.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                mp = MediaPlayer.create(this, R.raw.s8);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         mp.release();
@@ -254,10 +273,150 @@ public class MusicActivity extends AppCompatActivity {
                 });
                 createDot(8);
                 break;
+            case 9:
+                mp = MediaPlayer.create(this, R.raw.s9);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                createDot(9);
+                break;
+            case 10:
+                mp = MediaPlayer.create(this, R.raw.s10);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                createDot(10);
+                break;
+            case 11:
+                mp = MediaPlayer.create(this, R.raw.s11);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                createDot(11);
+                break;
+            case 12:
+                mp = MediaPlayer.create(this, R.raw.s12);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                createDot(12);
+                break;
+            case 13:
+                mp = MediaPlayer.create(this, R.raw.s13);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                createDot(13);
+                break;
+            case 14:
+                mp = MediaPlayer.create(this, R.raw.s14);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                createDot(14);
+                break;
+            case 15:
+                mp = MediaPlayer.create(this, R.raw.s15);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                createDot(15);
+                break;
+            case 16:
+                mp = MediaPlayer.create(this, R.raw.s16);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                createDot(16);
+                break;
+            case 17:
+                mp = MediaPlayer.create(this, R.raw.s17);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                createDot(17);
+                break;
+            case 18:
+                mp = MediaPlayer.create(this, R.raw.s18);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                createDot(18);
+                break;
+            case 19:
+                mp = MediaPlayer.create(this, R.raw.s19);
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                    }
+                });
+                createDot(19);
+                break;
+
         }
     }
 
-    @OnClick({R.id.activity_music_1_ib, R.id.activity_music_2_ib, R.id.activity_music_3_ib, R.id.activity_music_4_ib, R.id.activity_music_5_ib, R.id.activity_music_6_ib, R.id.activity_music_7_ib, R.id.activity_music_8_ib})
+
+    public void updateUndoBtnText() {
+        activityMusicUndoNrBtn.setText("" + loops.size());
+    }
+
+    @OnClick(R.id.activity_music_startover_btn)
+    public void onLoopSequencePressed() {
+        loops.clear();
+    }
+
+    @OnClick(R.id.activity_music_undo_nr_btn)
+    public void onUndoSequencePressed() {
+        if (loops.size() > 0) {
+            loops.remove(loops.size() - 1);
+            updateUndoBtnText();
+        }
+    }
+
+    @OnClick({R.id.activity_music_1_ib, R.id.activity_music_2_ib, R.id.activity_music_3_ib, R.id.activity_music_4_ib, R.id.activity_music_5_ib, R.id.activity_music_6_ib, R.id.activity_music_7_ib, R.id.activity_music_8_ib, R.id.activity_music_9_ib, R.id.activity_music_10_ib, R.id.activity_music_11_ib, R.id.activity_music_12_ib, R.id.activity_music_13_ib, R.id.activity_music_14_ib, R.id.activity_music_15_ib, R.id.activity_music_16_ib, R.id.activity_music_17_ib, R.id.activity_music_18_ib})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_music_1_ib:
@@ -300,23 +459,80 @@ public class MusicActivity extends AppCompatActivity {
                 loopCreateSequence(8);
 
                 break;
+            case R.id.activity_music_9_ib:
+                playSample(9);
+                loopCreateSequence(9);
+                break;
+            case R.id.activity_music_10_ib:
+                playSample(10);
+                loopCreateSequence(10);
+                break;
+            case R.id.activity_music_11_ib:
+                playSample(11);
+                loopCreateSequence(11);
+                break;
+            case R.id.activity_music_12_ib:
+                playSample(12);
+                loopCreateSequence(12);
+                break;
+            case R.id.activity_music_13_ib:
+                playSample(13);
+                loopCreateSequence(13);
+                break;
+            case R.id.activity_music_14_ib:
+                playSample(14);
+                loopCreateSequence(14);
+                break;
+            case R.id.activity_music_15_ib:
+                playSample(15);
+                loopCreateSequence(15);
+                break;
+            case R.id.activity_music_16_ib:
+                playSample(16);
+                loopCreateSequence(16);
+                break;
+            case R.id.activity_music_17_ib:
+                playSample(17);
+                loopCreateSequence(17);
+                break;
+            case R.id.activity_music_18_ib:
+                playSample(18);
+                loopCreateSequence(18);
+                break;
         }
     }
 
-    public void updateUndoBtnText() {
-        activityMusicUndoBtn.setText("Samples: " + loops.size());
-    }
+    @OnClick({R.id.activity_music_num_1_ib, R.id.activity_music_num_5_ib, R.id.activity_music_num_10_ib, R.id.activity_music_num_15_ib, R.id.activity_music_num_20_ib})
+    public void onSpeedClicked(View view) {
+        switch (view.getId()) {
+            case R.id.activity_music_num_1_ib:
+                speed = 1;
+                break;
+            case R.id.activity_music_num_5_ib:
+                speed = 5;
+                break;
+            case R.id.activity_music_num_10_ib:
+                speed = 10;
+                break;
+            case R.id.activity_music_num_15_ib:
+                speed = 15;
+                break;
+            case R.id.activity_music_num_20_ib:
+                speed = 20;
+                break;
+        }
 
-    @OnClick(R.id.activity_music_startover_btn)
-    public void onLoopSequencePressed() {
-        loops.clear();
-    }
-
-    @OnClick(R.id.activity_music_undo_btn)
-    public void onUndoSequencePressed() {
-        if (loops.size() > 0) {
-            loops.remove(loops.size() - 1);
-            updateUndoBtnText();
+        if (speed == 1) {
+            speedDraw = 50;
+        } else if (speed == 5) {
+            speedDraw = 40;
+        } else if (speed == 10) {
+            speedDraw = 30;
+        } else if (speed == 15) {
+            speedDraw = 20;
+        } else if (speed == 20) {
+            speedDraw = 10;
         }
     }
+
 }
