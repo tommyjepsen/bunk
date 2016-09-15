@@ -3,37 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@color/bg"
     tools:context="com.tonsstudio.bunk.MusicActivity">
-
-    <TextView
-        android:id="@+id/activity_music_sequence_nr_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:text="1" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/activity_music_startover_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Start over" />
-
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
         android:orientation="horizontal">
 
 
@@ -60,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="450dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -141,6 +117,19 @@
                 android:layout_gravity="bottom"
                 android:orientation="vertical">
 
+
+                <TextView
+                    android:id="@+id/activity_music_sequence_nr_tv"
+                    android:layout_width="wrap_content"
+                    android:padding="6dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:minWidth="40dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="0"
+                    android:textColor="@android:color/white" />
+
+
                 <Button
                     android:id="@+id/activity_music_undo_nr_btn"
                     android:layout_width="wrap_content"
@@ -188,7 +177,7 @@
                 android:id="@+id/activity_music_1_ib"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@android:color/transparent"
                 android:src="@drawable/selector_btn1" />
 
             <ImageButton

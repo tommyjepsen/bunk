@@ -79,10 +79,11 @@ public class MusicActivity extends AppCompatActivity {
 
     @Bind(R.id.activity_music_sequence_nr_tv)
     TextView activityMusicSequenceNrTv;
-    @Bind(R.id.activity_music_startover_btn)
-    Button activityMusicStartoverBtn;
+
     @Bind(R.id.activity_music_undo_nr_btn)
     Button activityMusicUndoNrBtn;
+    @Bind(R.id.activity_music_rec_btn)
+    Button activityMusicRecBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -418,11 +419,6 @@ public class MusicActivity extends AppCompatActivity {
         activityMusicUndoNrBtn.setText("" + loops.size());
     }
 
-    @OnClick(R.id.activity_music_startover_btn)
-    public void onLoopSequencePressed() {
-        loops.clear();
-    }
-
     @OnClick(R.id.activity_music_undo_nr_btn)
     public void onUndoSequencePressed() {
         if (loops.size() > 0) {
@@ -553,8 +549,12 @@ public class MusicActivity extends AppCompatActivity {
     @OnClick(R.id.activity_music_rec_btn)
     public void onClick() {
         if (recording) {
+            activityMusicRecBtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_btn_darkyellow));
+
             recording = false;
         } else {
+            activityMusicRecBtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_btn_darkyellowff));
+
             recording = true;
         }
     }
