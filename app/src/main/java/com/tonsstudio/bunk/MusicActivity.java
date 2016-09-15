@@ -13,6 +13,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -86,12 +90,19 @@ public class MusicActivity extends AppCompatActivity {
     Button activityMusicRecBtn;
     @Bind(R.id.activity_music_fadeout_fl)
     FrameLayout activityMusicFadeoutFl;
+    AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music);
         ButterKnife.bind(this);
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-9538156498936820~7513431590");
+        mAdView = (AdView) findViewById(R.id.activity_music_adview);
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mAdView.loadAd(adRequest);
 
         activityMusicFadeoutFl.animate().alpha(0).setStartDelay(100).setDuration(1500).start();
         Handler h = new Handler();

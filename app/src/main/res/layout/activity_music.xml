@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -345,9 +346,18 @@
 
     </LinearLayout>
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/activity_music_adview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-9538156498936820/8990164794" />
+
     <FrameLayout
         android:id="@+id/activity_music_fadeout_fl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg" />
+
 </FrameLayout>
