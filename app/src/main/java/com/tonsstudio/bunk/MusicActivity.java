@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
@@ -74,6 +75,7 @@ public class MusicActivity extends AppCompatActivity {
     int screenHeight = 0;
     int speed = 10;
     int speedDraw = 15;
+    String category = "d"; // or "s"
 
     @Bind(R.id.activity_music_sequence_nr_tv)
     TextView activityMusicSequenceNrTv;
@@ -114,7 +116,7 @@ public class MusicActivity extends AppCompatActivity {
                     }
                 }
 
-                if (loopsSequenceTiming > 100) {
+                if (loopsSequenceTiming > speed * 10) {
                     createStartDot();
 
                     loopsSequenceTiming = 1;
@@ -170,10 +172,12 @@ public class MusicActivity extends AppCompatActivity {
     }
 
     public void loopCreateSequence(int dotNr) {
-        LoopSequence loopSequence = new LoopSequence();
-        loopSequence.setNr(dotNr);
-        loopSequence.setTime(loopsSequenceTiming);
-        loops.add(loopSequence);
+        if (recording) {
+            LoopSequence loopSequence = new LoopSequence();
+            loopSequence.setNr(dotNr);
+            loopSequence.setTime(loopsSequenceTiming);
+            loops.add(loopSequence);
+        }
 
         updateUndoBtnText();
     }
@@ -182,219 +186,230 @@ public class MusicActivity extends AppCompatActivity {
         loop.postDelayed(loopRunnable, speed);
     }
 
-    public void playSample(int nr) {
-        MediaPlayer mp;
-        switch (nr) {
-            case 1:
-                mp = MediaPlayer.create(this, R.raw.s1);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(1);
-                break;
-            case 2:
-                mp = MediaPlayer.create(this, R.raw.s2);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(2);
-                break;
-            case 3:
-                mp = MediaPlayer.create(this, R.raw.s3);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(3);
-                break;
-            case 4:
-                mp = MediaPlayer.create(this, R.raw.s4);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(4);
-                break;
-            case 5:
-                mp = MediaPlayer.create(this, R.raw.s5);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(5);
-                break;
-            case 6:
-                mp = MediaPlayer.create(this, R.raw.s6);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(6);
-                break;
-            case 7:
-                mp = MediaPlayer.create(this, R.raw.s7);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(7);
-                break;
-            case 8:
-                mp = MediaPlayer.create(this, R.raw.s8);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(8);
-                break;
-            case 9:
-                mp = MediaPlayer.create(this, R.raw.s9);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(9);
-                break;
-            case 10:
-                mp = MediaPlayer.create(this, R.raw.s10);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(10);
-                break;
-            case 11:
-                mp = MediaPlayer.create(this, R.raw.s11);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(11);
-                break;
-            case 12:
-                mp = MediaPlayer.create(this, R.raw.s12);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(12);
-                break;
-            case 13:
-                mp = MediaPlayer.create(this, R.raw.s13);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(13);
-                break;
-            case 14:
-                mp = MediaPlayer.create(this, R.raw.s14);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(14);
-                break;
-            case 15:
-                mp = MediaPlayer.create(this, R.raw.s15);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(15);
-                break;
-            case 16:
-                mp = MediaPlayer.create(this, R.raw.s16);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(16);
-                break;
-            case 17:
-                mp = MediaPlayer.create(this, R.raw.s17);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(17);
-                break;
-            case 18:
-                mp = MediaPlayer.create(this, R.raw.s18);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(18);
-                break;
-            case 19:
-                mp = MediaPlayer.create(this, R.raw.s19);
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-                createDot(19);
-                break;
+    public int getAndroidRaw(String pDrawableName) {
+        int resourceId = getResources().getIdentifier("raw/" + pDrawableName, null, this.getPackageName());
+        return resourceId;
+    }
 
+    public void playSample(final int nr) {
+        MediaPlayer mp;
+        int rawId = getAndroidRaw(category + nr);
+
+        try {
+            switch (nr) {
+                case 1:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(1);
+                    break;
+                case 2:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(2);
+                    break;
+                case 3:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(3);
+                    break;
+                case 4:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(4);
+                    break;
+                case 5:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(5);
+                    break;
+                case 6:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(6);
+                    break;
+                case 7:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(7);
+                    break;
+                case 8:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(8);
+                    break;
+                case 9:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(9);
+                    break;
+                case 10:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(10);
+                    break;
+                case 11:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(11);
+                    break;
+                case 12:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(12);
+                    break;
+                case 13:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(13);
+                    break;
+                case 14:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(14);
+                    break;
+                case 15:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(15);
+                    break;
+                case 16:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(16);
+                    break;
+                case 17:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(17);
+                    break;
+                case 18:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(18);
+                    break;
+                case 19:
+                    mp = MediaPlayer.create(this, rawId);
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        }
+                    });
+                    createDot(19);
+                    break;
+
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "playSample: ", e);
         }
     }
 
@@ -535,4 +550,12 @@ public class MusicActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick(R.id.activity_music_rec_btn)
+    public void onClick() {
+        if (recording) {
+            recording = false;
+        } else {
+            recording = true;
+        }
+    }
 }
