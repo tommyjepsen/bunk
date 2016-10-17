@@ -51,11 +51,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="5dp"
+                    android:layout_marginTop="25dp"
+                    android:textSize="10sp"
                     android:background="@drawable/selector_btn_yellow"
                     android:minHeight="0dp"
-                    android:minWidth="35dp"
+                    android:minWidth="60dp"
                     android:padding="6dp"
-                    android:text="1"
+                    android:text="Speed: 1"
                     android:textColor="@android:color/white" />
 
                 <Button
@@ -65,10 +67,11 @@
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/selector_btn_yellow"
+                    android:textSize="10sp"
                     android:minHeight="0dp"
-                    android:minWidth="35dp"
+                    android:minWidth="60dp"
                     android:padding="6dp"
-                    android:text="5"
+                    android:text="Speed: 5"
                     android:textColor="@android:color/white" />
 
                 <Button
@@ -77,11 +80,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="5dp"
+                    android:textSize="10sp"
                     android:background="@drawable/selector_btn_yellow"
                     android:minHeight="0dp"
-                    android:minWidth="35dp"
+                    android:minWidth="60dp"
                     android:padding="6dp"
-                    android:text="10"
+                    android:text="Speed: 10"
                     android:textColor="@android:color/white" />
 
                 <Button
@@ -92,9 +96,10 @@
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/selector_btn_yellow"
                     android:minHeight="0dp"
-                    android:minWidth="35dp"
+                    android:minWidth="60dp"
+                    android:textSize="10sp"
                     android:padding="6dp"
-                    android:text="15"
+                    android:text="Speed: 15"
                     android:textColor="@android:color/white" />
 
                 <Button
@@ -105,9 +110,10 @@
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/selector_btn_yellow"
                     android:minHeight="0dp"
-                    android:minWidth="35dp"
+                    android:textSize="10sp"
+                    android:minWidth="60dp"
                     android:padding="6dp"
-                    android:text="20"
+                    android:text="Speed: 20"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>
@@ -138,27 +144,28 @@
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/selector_btn"
                     android:minHeight="0dp"
+                    android:textSize="10sp"
                     android:minWidth="35dp"
                     android:padding="6dp"
-                    android:text="20"
+                    android:text="Undo: 0"
                     android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/activity_music_rec_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:textSize="10sp"
                     android:background="@drawable/selector_btn_darkyellow"
                     android:minHeight="0dp"
                     android:minWidth="35dp"
                     android:padding="6dp"
-                    android:text="R"
+                    android:text="Record"
+                    android:layout_marginBottom="25dp"
                     android:textColor="@android:color/white" />
             </LinearLayout>
         </FrameLayout>
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -196,7 +203,6 @@
                 android:src="@drawable/selector_btn3" />
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -357,6 +363,7 @@
     <FrameLayout
         android:id="@+id/activity_music_fadeout_fl"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent"
         android:background="@color/bg" />
 

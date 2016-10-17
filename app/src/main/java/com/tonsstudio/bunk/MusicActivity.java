@@ -438,7 +438,7 @@ public class MusicActivity extends AppCompatActivity {
 
 
     public void updateUndoBtnText() {
-        activityMusicUndoNrBtn.setText("" + loops.size());
+        activityMusicUndoNrBtn.setText("Undo: " + loops.size());
     }
 
     @OnClick(R.id.activity_music_undo_nr_btn)

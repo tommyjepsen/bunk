@@ -10,6 +10,8 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,14 +24,29 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout activityMainFadeinFl;
     InterstitialAd mInterstitialAd;
 
+    Tracker mTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        activityMainLogoIv.animate().translationY(50).setStartDelay(100).setDuration(2000).start();
+        GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+        mTracker = analytics.newTracker("UA-84229636-1");
 
+        activityMainLogoIv.animate().translationY(50).setStartDelay(100).setDuration(2000).start();
+        activityMainLogoIv.animate().alpha(0).setStartDelay(200).setDuration(250).start();
+        activityMainFadeinFl.animate().alpha(1).setStartDelay(200).setDuration(1000).start();
+
+        activityMainLogoIv.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = new Intent(MainActivity.this, MusicActivity.class);
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
+        }, 1500);
         MobileAds.initialize(this, "ca-app-pub-9538156498936820~7513431590");
 
         mInterstitialAd = new InterstitialAd(this);
@@ -77,6 +94,6 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder()
 //                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
-        mInterstitialAd.loadAd(adRequest);
+//        mInterstitialAd.loadAd(adRequest);
     }
 }
